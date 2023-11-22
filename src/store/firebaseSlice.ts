@@ -15,7 +15,7 @@ export const addUser = createAsyncThunk<IUser, string>(
 	async (userData: string) => {
 		try {
 			const user: IUser = {
-				name: userData, // Using the passed userData
+				name: userData,
 				id: Date.now(),
 				points: "",
 			};
@@ -25,7 +25,6 @@ export const addUser = createAsyncThunk<IUser, string>(
 
 			console.log("User added:", user);
 
-			// Assuming you want to return the user object
 			return user;
 		} catch (error) {
 			console.error("Error adding user:", error);
@@ -56,9 +55,11 @@ const firebaseSlice = createSlice({
 			})
 			.addCase(addUser.fulfilled, (state, action) => {
 				state.userName = action.payload.name;
+				state.loading = false;
 			})
 			.addCase(addUser.rejected, (state, action) => {
 				state.error = action.payload;
+				state.loading = false;
 			});
 	},
 });
