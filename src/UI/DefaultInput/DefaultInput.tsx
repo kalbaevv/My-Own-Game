@@ -4,10 +4,11 @@ import TextField from "@mui/material/TextField";
 interface IDefaultInput {
 	label: string;
 	placeholder: string;
+	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function BasicTextFields(props: IDefaultInput) {
-	const { label, placeholder } = props;
+	const { label, placeholder, onChange } = props;
 	return (
 		<Box
 			component="form"
@@ -17,12 +18,13 @@ export default function BasicTextFields(props: IDefaultInput) {
 			noValidate
 			autoComplete="off">
 			<TextField
+				onChange={onChange}
 				sx={{ backgroundColor: "#DCBFFF" }}
 				color="secondary"
 				id="filled-basic"
 				placeholder={placeholder}
 				label={label}
-				variant="filled"
+				variant="outlined"
 			/>
 		</Box>
 	);
